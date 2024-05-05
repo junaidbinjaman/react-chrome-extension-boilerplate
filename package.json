@@ -1,0 +1,15 @@
+{
+  "name": "react-extension",
+  "version": "1.0.0",
+  "description": "Chrome extension in react typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Junaid Bin Jaman",
+  "license": "ISC",
+  "devDependencies": {
+    "react": "^18.3.1",
+    "typescript": "^5.4.5"
+  }
+}
