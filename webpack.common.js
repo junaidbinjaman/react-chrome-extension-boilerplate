@@ -1,13 +1,14 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
-  devtool: 'cheap-module-source-map',
   entry: {
     popup: path.resolve('src/popup/popup.tsx'),
-    options: path.resolve('src/options/options.tsx')
+    options: path.resolve('src/options/options.tsx'),
+    background: path.resolve('src/background/background.ts'),
+    contentScript: path.resolve('src/contentScript/contentScript.ts'),
   },
   module: {
     rules: [
@@ -18,15 +19,18 @@ module.exports = {
       },
       {
         use: ['style-loader', 'css-loader'],
-        test: /\.css$/i
+        test: /\.css$/i,
       },
       {
         type: 'asset/resource',
-        test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/
-      }
+        test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
+      },
     ],
   },
   plugins: [
+    new CleanWebpackPlugin({
+      cleanStaleWebpackAssets: false
+    }),
     new CopyPlugin({
       patterns: [
         {
@@ -35,10 +39,7 @@ module.exports = {
         },
       ],
     }),
-    ...getHtmlPlugins([
-      'popup',
-      'options'
-    ])
+    ...getHtmlPlugins(['popup', 'options']),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'], // Move extensions property here
@@ -49,15 +50,18 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      chunks: 'all'
-    }
-  }
+      chunks: 'all',
+    },
+  },
 };
 
 function getHtmlPlugins(chunks) {
-  return chunks.map(chunks => new HtmlPlugin({
-    title: 'React Extension',
-    filename: `${chunks}.html`,
-    chunks: [chunks]
-  }))
+  return chunks.map(
+    (chunks) =>
+      new HtmlPlugin({
+        title: 'React Extension',
+        filename: `${chunks}.html`,
+        chunks: [chunks],
+      })
+  );
 }
