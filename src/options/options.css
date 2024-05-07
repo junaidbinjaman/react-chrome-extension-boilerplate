@@ -1,0 +1,16 @@
+body {
+    width: 95vw;
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    color: #004aad;
+}
+
+p, small, a {
+    color: #838383;
+}

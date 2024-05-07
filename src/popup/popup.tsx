@@ -6,9 +6,11 @@ const Test = () => {
   return (
     <div>
       <h1>Hello, World!</h1>
-      <p>Junaid Bin Jaman</p>
-      <small>Is here to help the world.</small>
-      <img src='icon.png' alt='' />
+      <img src='icon.png' width={'300'} height={'300'} alt='' />
+      <p>React Chrome Extension Boilerplate </p>
+      <small>
+        <a href='https://junaidbinjaman.com'>Developed by Junaid Bin Jaman</a>
+      </small>
     </div>
   );
 };

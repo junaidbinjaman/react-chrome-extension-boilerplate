@@ -1,5 +1,13 @@
 body {
     width: 400px;
     height: 400px;
-    background-color: red;
+    text-align: center;
+}
+
+h1 {
+    color: #004aad;
+}
+
+p, small, a {
+    color: #838383;
 }
